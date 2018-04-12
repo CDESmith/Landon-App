@@ -59,7 +59,7 @@ class ClientController extends Controller
 
         if( $request->isMethod('post') )
         {
-            //dd($data);
+            // dd($data);
             $this->validate(
                 $request,
                 [
