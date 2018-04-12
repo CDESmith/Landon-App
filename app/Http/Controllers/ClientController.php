@@ -21,6 +21,7 @@ class ClientController extends Controller
     public function index()
     {
         $data = [];
+
         $obj = new \stdClass;
         $obj->id = 1;
         $obj->title = 'mr';
@@ -28,7 +29,7 @@ class ClientController extends Controller
         $obj->last_name = 'doe';
         $obj->email = 'john@domain.com';
         $data['clients'][] = $obj;
-
+    
         $obj = new \stdClass;
         $obj->id = 2;
         $obj->title = 'ms';
@@ -39,11 +40,43 @@ class ClientController extends Controller
         return view('client/index', $data);
     }
 
-    public function newClient()
+    public function newClient( Request $request )
     {
         $data = [];
+
+        $data['title'] = $request->input('title');
+        $data['name'] = $request->input('name');
+        $data['last_name'] = $request->input('last_name');
+        $data['address'] = $request->input('address');
+        $data['zip_code'] = $request->input('zip_code');
+        $data['city'] = $request->input('city');
+        $data['state'] = $request->input('state');
+        $data['email'] = $request->input('email');
+        
+
         $data['titles'] = $this->titles;
         $data['modify'] = 0;
+
+        if( $request->isMethod('post') )
+        {
+            //dd($data);
+            $this->validate(
+                $request,
+                [
+                    'name' => 'required|min:5',
+                    'last_name' => 'required',
+                    'address' => 'required',
+                    'zip_code' => 'required',
+                    'city' => 'required',
+                    'state' => 'required',
+                    'email' => 'required',
+
+                ]
+            );
+
+            return redirect('clients');
+        }
+
         return view('client/form', $data);
     }
 

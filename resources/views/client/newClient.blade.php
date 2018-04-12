@@ -8,10 +8,10 @@
           <div class="medium-4  columns">
             <label>Title</label>
             <select name="form[title]">
-            @foreach( $titles as $title)
-              <option value="{{ $title }}">{{ $title }}.</option>
+            @foreach( $titles as $title )
+                          <option value="{{ $title }}" >{{ $title }}.</option>
             @endforeach
-            </select>
+                        </select>
           </div>
           <div class="medium-4  columns">
             <label>Name</label>
