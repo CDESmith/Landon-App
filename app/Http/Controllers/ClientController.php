@@ -30,7 +30,7 @@ class ClientController extends Controller
 
     public function create()
     {
-        return view('client/create');
+            return view('client/create');
     }
 
     public function show($client_id)
