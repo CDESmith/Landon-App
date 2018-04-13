@@ -61,11 +61,11 @@ class ClientController extends Controller
             );
 
             $client->insert($data);
-
+            
             return redirect('clients');
         }
         $data['titles'] = $this->titles;
-        $data['modify'] = 1;
+        $data['modify'] = 0;
         return view('client/form', $data);
     }
 
@@ -74,9 +74,9 @@ class ClientController extends Controller
             return view('client/create');
     }
 
-    public function show($client_id)
+    public function show($client_id, Request $request)
     {
-        $data = [];
+        $data = []; $data['client_id'] = $client_id;
         $data['titles'] = $this->titles;
         $data['modify'] = 1;
         $client_data = $this->client->find($client_id);
@@ -88,6 +88,9 @@ class ClientController extends Controller
         $data['city'] = $client_data->city;
         $data['state'] = $client_data->state;
         $data['email'] = $client_data->email;
+
+        $request->session()->put('last_updated', $client_data->name . ' ' . 
+        $client_data->last_name);
         
         return view('client/form', $data);
     }
