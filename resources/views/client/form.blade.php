@@ -25,7 +25,7 @@
           </div>
           <div class="medium-8  columns">
             <label>Address</label>
-            <input name="address" type="text" value="{{ old('adress') ? old('address') : $address }}">
+            <input name="address" type="text" value="{{ old('address') ? old('address') : $address }}">
             <small class="error">{{$errors->first('address')}}</small>
           </div>
           <div class="medium-4  columns">
@@ -40,7 +40,7 @@
           </div>
           <div class="medium-4  columns">
             <label>State</label>
-            <input name="state" type="text" value="{{ old('state') ? old('state') : $state }}">
+            <input name="state" type="text" value="{{ old('state') ? old('state'): $state }}">
             <small class="error">{{$errors->first('state')}}</small>
           </div>
           <div class="medium-12  columns">

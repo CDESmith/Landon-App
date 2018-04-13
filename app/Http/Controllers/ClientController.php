@@ -42,9 +42,10 @@ class ClientController extends Controller
         $data['email'] = $request->input('email');
         
 
+
         if( $request->isMethod('post') )
         {
-            // dd($data);
+            //dd($data);
             $this->validate(
                 $request,
                 [
@@ -63,8 +64,7 @@ class ClientController extends Controller
 
             return redirect('clients');
         }
-        $data['titles'] = $this->titles;
-        $data['modify'] = 0;
+        
         return view('client/form', $data);
     }
 
@@ -83,11 +83,11 @@ class ClientController extends Controller
         $data['last_name'] = $client_data->last_name;
         $data['title'] = $client_data->title;
         $data['address'] = $client_data->address;
+        $data['zip_code'] = $client_data->zip_code;
         $data['city'] = $client_data->city;
         $data['state'] = $client_data->state;
-        $data['zip_code'] = $client_data->zip_code;
         $data['email'] = $client_data->email;
-    
+        
         return view('client/form', $data);
     }
 
@@ -105,9 +105,10 @@ class ClientController extends Controller
         $data['email'] = $request->input('email');
         
 
+
         if( $request->isMethod('post') )
         {
-            // dd($data);
+            //dd($data);
             $this->validate(
                 $request,
                 [
@@ -121,7 +122,6 @@ class ClientController extends Controller
 
                 ]
             );
-
 
             $client_data = $this->client->find($client_id);
 
@@ -138,8 +138,8 @@ class ClientController extends Controller
 
             return redirect('clients');
         }
-        $data['titles'] = $this->titles;
-        $data['modify'] = 0;
+        
         return view('client/form', $data);
     }
+
 }

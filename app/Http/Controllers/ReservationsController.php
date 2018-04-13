@@ -1,16 +1,15 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Client as Client;
 use App\Room as Room;
 use App\Reservation as Reservation;
+
 use Illuminate\Http\Request;
 
 class ReservationsController extends Controller
 {
     //
-    public function bookRoom( $client_id, $room_id, $date_in, $date_out )
+    public function bookRoom($client_id, $room_id, $date_in, $date_out)
     {
         $reservation = new Reservation();
         $client_instance = new Client();
@@ -25,10 +24,11 @@ class ReservationsController extends Controller
         $reservation->client()->associate($client);
         if( $room_instance->isRoomBooked( $room_id, $date_in, $date_out ) )
         {
-            abort(405, 'Trying to book an already booked room!');
+            abort(405, 'Trying to book an already booked room');
         }
         $reservation->save();
 
         return redirect()->route('clients');
+        //return view('reservations/bookRoom');
     }
 }
