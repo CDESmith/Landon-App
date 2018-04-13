@@ -24,16 +24,15 @@ class ExampleTest extends TestCase
     public function testNewClientForm()
     {
         $response = $this->get('/clients/new');
-
         $response->assertStatus(200);
     }
 
-    public function testProfessorOption()
-    {
+    public function testProfessorOption(){
         $response = $this->get('/clients/new');
         $this->assertContains('Professor',
-                                $response->getContent(),
-                                'HTML should have Professor.'
-                            );
+            $response->getContent(), 
+            'HTML should have Professor'
+        );
     }
+
 }
