@@ -64,7 +64,8 @@ class ClientController extends Controller
 
             return redirect('clients');
         }
-        
+        $data['titles'] = $this->titles;
+        $data['modify'] = 1;
         return view('client/form', $data);
     }
 
