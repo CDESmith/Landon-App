@@ -128,7 +128,7 @@ class ClientController extends Controller
             $client_data->title = $request->input('title');
             $client_data->name = $request->input('name');
             $client_data->last_name = $request->input('last_name');
-            $client_data->adress = $request->input('address');
+            $client_data->address = $request->input('address');
             $client_data->zip_code = $request->input('zip_code');
             $client_data->city = $request->input('city');
             $client_data->state = $request->input('state');
