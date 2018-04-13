@@ -22,6 +22,7 @@ Route::middleware('auth')->group( function(){
     Route::post('/reservations/{client_id}', 'RoomsController@checkAvailableRooms')->name('check_room');
 
     Route::get('/book/room/{client_id}/{room_id}/{date_in}/{date_out}', 'ReservationsController@bookRoom')->name('book_room');
+    Route::get('export', 'ClientController@export');
 });
 
 
