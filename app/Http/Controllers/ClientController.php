@@ -42,7 +42,6 @@ class ClientController extends Controller
         $data['email'] = $request->input('email');
         
 
-
         if( $request->isMethod('post') )
         {
             // dd($data);
@@ -76,7 +75,7 @@ class ClientController extends Controller
 
     public function show($client_id)
     {
-        $data = [];
+        $data = []; $data['client_id'] = $client_id;
         $data['titles'] = $this->titles;
         $data['modify'] = 1;
         $client_data = $this->client->find($client_id);
@@ -89,6 +88,58 @@ class ClientController extends Controller
         $data['zip_code'] = $client_data->zip_code;
         $data['email'] = $client_data->email;
     
+        return view('client/form', $data);
+    }
+
+    public function modify( Request $request, $client_id, Client $client )
+    {
+        $data = [];
+
+        $data['title'] = $request->input('title');
+        $data['name'] = $request->input('name');
+        $data['last_name'] = $request->input('last_name');
+        $data['address'] = $request->input('address');
+        $data['zip_code'] = $request->input('zip_code');
+        $data['city'] = $request->input('city');
+        $data['state'] = $request->input('state');
+        $data['email'] = $request->input('email');
+        
+
+        if( $request->isMethod('post') )
+        {
+            // dd($data);
+            $this->validate(
+                $request,
+                [
+                    'name' => 'required|min:5',
+                    'last_name' => 'required',
+                    'address' => 'required',
+                    'zip_code' => 'required',
+                    'city' => 'required',
+                    'state' => 'required',
+                    'email' => 'required',
+
+                ]
+            );
+
+
+            $client_data = $this->client->find($client_id);
+
+            $client_data->title = $request->input('title');
+            $client_data->name = $request->input('name');
+            $client_data->last_name = $request->input('last_name');
+            $client_data->adress = $request->input('address');
+            $client_data->zip_code = $request->input('zip_code');
+            $client_data->city = $request->input('city');
+            $client_data->state = $request->input('state');
+            $client_data->email = $request->input('email');
+
+            $client_data->save();
+
+            return redirect('clients');
+        }
+        $data['titles'] = $this->titles;
+        $data['modify'] = 0;
         return view('client/form', $data);
     }
 }
